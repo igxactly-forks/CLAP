@@ -165,7 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\clap.cpp" />
-    <ClCompile Include="UnitTests.cpp" />
+    <ClCompile Include="UnitTestsWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CLAP.vcxproj">
@@ -173,7 +173,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\clap.h" />
     <ClInclude Include="..\clap.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

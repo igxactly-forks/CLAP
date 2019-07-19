@@ -8,11 +8,10 @@ Minimalistic C++17 command line parser.
 ### Features
 
 - Only 2 files are needed:
-  - `clap.hpp` or `clap.h`
+  - `clap.hpp`
   - `clap.cpp`
 - Just 3 functions:
   -  `parse`
   -  `has`
   -  `get`
-- C binding header that doesn't include anything
-- Supports both Windows and Linux
+- Supports both Windows and Linux style

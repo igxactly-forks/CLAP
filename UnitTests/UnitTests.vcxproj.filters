@@ -15,17 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UnitTests.cpp">
+    <ClCompile Include="..\clap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\clap.cpp">
+    <ClCompile Include="UnitTestsWin32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\clap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\clap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

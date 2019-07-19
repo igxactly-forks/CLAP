@@ -22,9 +22,6 @@
     <ClInclude Include="clap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="clap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="clap.cpp">
@@ -34,5 +31,6 @@
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
