@@ -75,5 +75,13 @@ namespace UnitTests
             auto const& vec = *cla::get("std");
             Assert::IsTrue(vec[0] == std, L"std should be c++17");
         }
+
+        TEST_METHOD(HasFlagReturnsFalseForNotStoredFlag)
+        {
+            Assert::IsFalse(cla::has_flag("Hello!"), L"Hello! flag shouldn't exist");
+            Assert::IsFalse(cla::has_flag(""), L"Empty flag shouldn't exist");
+            Assert::IsFalse(cla::has_flag("\0"), L"Null char flag shouldn't exist");
+            Assert::IsFalse(cla::has_flag("Std"), L"Std flag shouldn't exist");
+        }
 	};
 }
