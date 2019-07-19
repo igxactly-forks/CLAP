@@ -56,6 +56,14 @@ namespace UnitTests
             Assert::IsTrue(cla::has_data("Wd"), L"? should have data");
         }
 
+        TEST_METHOD(StdShouldHaveCPP17)
+        {
+            auto std = "c++17"sv;
+            auto const& vec = *cla::get("std");
+            Assert::IsTrue(vec.size() == 1, L"std should have 1 element");
+            Assert::IsTrue(vec[0] == std, L"std should be c++17");
+        }
+
         TEST_METHOD(QueryingLibFlagsYieldsExpectedResults)
         {
             auto lib_0 = "C:\\Windows\\System32\\kernel.dll"sv;
@@ -69,11 +77,31 @@ namespace UnitTests
             Assert::IsTrue(vec[2] == lib_2, L"stored lib should be equal to lib_2");
         }
 
-        TEST_METHOD(StdShouldHaveCPP17)
+        TEST_METHOD(WdFlagDataPresentAndCorrect)
         {
-            auto std = "c++17"sv;
-            auto const& vec = *cla::get("std");
-            Assert::IsTrue(vec[0] == std, L"std should be c++17");
+            auto wd_123 = "123"sv;
+            auto wd_456 = "456"sv;
+            auto wd_789 = "789"sv;
+            auto wd_abc = "abc"sv;
+            auto wd_def = "def"sv;
+            auto wd_ghi = "ghi"sv;
+            auto wd_lmn = "lmn"sv;
+            auto wd_opq = "opq"sv;
+            auto wd_rst = "rst"sv;
+            auto wd_uvz = "uvz"sv;
+
+            auto const& vec = *cla::get("Wd");
+            Assert::IsTrue(vec.size() == 10, L"Wd should have 10 elements");
+            Assert::IsTrue(vec[0] == wd_123, L"vec[0] should be 123");
+            Assert::IsTrue(vec[1] == wd_456, L"vec[1] should be 456");
+            Assert::IsTrue(vec[2] == wd_789, L"vec[2] should be 789");
+            Assert::IsTrue(vec[3] == wd_abc, L"vec[3] should be abc");
+            Assert::IsTrue(vec[4] == wd_def, L"vec[4] should be def");
+            Assert::IsTrue(vec[5] == wd_ghi, L"vec[5] should be ghi");
+            Assert::IsTrue(vec[6] == wd_lmn, L"vec[6] should be lmn");
+            Assert::IsTrue(vec[7] == wd_opq, L"vec[7] should be opq");
+            Assert::IsTrue(vec[8] == wd_rst, L"vec[8] should be rst");
+            Assert::IsTrue(vec[9] == wd_uvz, L"vec[9] should be uvz");
         }
 
         TEST_METHOD(HasFlagReturnsFalseForNotStoredFlag)
