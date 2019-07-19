@@ -60,7 +60,12 @@ CLA_LIB_EXPORT void parse(int argc, char const** argv, opt_t opt) noexcept;
 /**
  * Checks if a flag is present.
  **/
-CLA_LIB_EXPORT bool has(std::string_view flag) noexcept;
+CLA_LIB_EXPORT bool has_flag(std::string_view flag) noexcept;
+
+/**
+ * Checks if a flag has data
+ **/
+CLA_LIB_EXPORT bool has_data(std::string_view flag) noexcept;
 
 /**
  * Returns the data associated with the flag.

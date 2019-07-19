@@ -33,26 +33,26 @@ namespace UnitTests
 
 		TEST_METHOD(QueryingForExistingFlagsYieldsTrue)
 		{
-            Assert::IsTrue(cla::has("cla-test.exe"), L"cla-test.exe not found");
-            Assert::IsTrue(cla::has("?"), L"? not found");
-            Assert::IsTrue(cla::has("std"), L"std not found");
-            Assert::IsTrue(cla::has("Lib"), L"Lib not found");
-            Assert::IsTrue(cla::has("W3"), L"W3 not found");
-            Assert::IsTrue(cla::has("Wd"), L"Wd not found");
+            Assert::IsTrue(cla::has_flag("cla-test.exe"), L"cla-test.exe not found");
+            Assert::IsTrue(cla::has_flag("?"), L"? not found");
+            Assert::IsTrue(cla::has_flag("std"), L"std not found");
+            Assert::IsTrue(cla::has_flag("Lib"), L"Lib not found");
+            Assert::IsTrue(cla::has_flag("W3"), L"W3 not found");
+            Assert::IsTrue(cla::has_flag("Wd"), L"Wd not found");
 		}
 
         TEST_METHOD(FlagsWithNoDataReturnsEmptyList)
         {
-            Assert::IsTrue(cla::get("cla-test.exe")->empty(), L"cla-test.exe shouldn't have data");
-            Assert::IsTrue(cla::get("?")->empty(), L"? shouldn't have data");
-            Assert::IsTrue(cla::get("std")->empty(), L"std shouldn't have data");
-            Assert::IsTrue(cla::get("W3")->empty(), L"W3 shouldn't have data");
+            Assert::IsFalse(cla::has_data("cla-test.exe"), L"cla-test.exe shouldn't have data");
+            Assert::IsFalse(cla::has_data("?"), L"? shouldn't have data");
+            Assert::IsFalse(cla::has_data("std"), L"std shouldn't have data");
+            Assert::IsFalse(cla::has_data("W3"), L"W3 shouldn't have data");
         }
 
         TEST_METHOD(FlagsWithDataReturnsNonEmptyList)
         {
-            Assert::IsFalse(cla::get("Lib")->empty(), L"? should have data");
-            Assert::IsFalse(cla::get("Wd")->empty(), L"? should have data");
+            Assert::IsTrue(cla::has_data("Lib"), L"? should have data");
+            Assert::IsTrue(cla::has_data("Wd"), L"? should have data");
         }
 	};
 }

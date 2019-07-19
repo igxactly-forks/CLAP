@@ -25,9 +25,15 @@ void cla::parse(int argc, char const** argv, cla::opt_t opt) noexcept
     }
 }
 
-bool cla::has(std::string_view flag) noexcept
+bool cla::has_flag(std::string_view flag) noexcept
 {
     return internal::args.find(flag) != internal::args.end();
+}
+
+CLA_LIB_EXPORT bool cla::has_data(std::string_view flag) noexcept
+{
+    auto* data = get(flag);
+    return data && !data->empty();
 }
 
 std::vector<std::string_view> const* cla::get(std::string_view flag) noexcept
