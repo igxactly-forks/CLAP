@@ -76,6 +76,9 @@ void cla::internal::parse_windows(int argc, char const** argv) noexcept
                 data_view = data_view.substr(next_data_sep+1);
                 next_data_sep = data_view.find(',');
             }
+            
+            // Works with both 1 single data or the last piece of data left
+            data.emplace_back(data_view);
 
             args.emplace(flag_view, std::move(data));
         }

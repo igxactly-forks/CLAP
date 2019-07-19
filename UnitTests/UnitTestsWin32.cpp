@@ -54,5 +54,18 @@ namespace UnitTests
             Assert::IsTrue(cla::has_data("Lib"), L"? should have data");
             Assert::IsTrue(cla::has_data("Wd"), L"? should have data");
         }
+
+        TEST_METHOD(QueryingLibFlagsYieldsExpectedResults)
+        {
+            constexpr std::string_view lib_0 = "C:\\Windows\\System32\\kernel.dll";
+            constexpr std::string_view lib_1 = "C:\\Users\\uname\\dev\\include\\mylib.lib";
+            constexpr std::string_view lib_2 = "C:\\include\\global\\somedll.dll";
+
+            auto const& vec = *cla::get("Lib");
+            Assert::IsTrue(vec.size() == 3, L"Lib should have 3 libraries");
+            Assert::IsTrue(vec[0] == lib_0, L"stored lib should be equal to lib_0");
+            Assert::IsTrue(vec[1] == lib_1, L"stored lib should be equal to lib_1");
+            Assert::IsTrue(vec[2] == lib_2, L"stored lib should be equal to lib_2");
+        }
 	};
 }
