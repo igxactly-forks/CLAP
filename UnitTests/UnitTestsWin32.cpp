@@ -40,5 +40,13 @@ namespace UnitTests
             Assert::IsTrue(cla::has("W3"), L"W3 not found");
             Assert::IsTrue(cla::has("Wd"), L"Wd not found");
 		}
+
+        TEST_METHOD(FlagsWithNoDataReturnsEmptyList)
+        {
+            Assert::IsTrue(cla::get("cla-test.exe")->empty(), L"cla-test.exe shouldn't have data");
+            Assert::IsTrue(cla::get("?")->empty(), L"? shouldn't have data");
+            Assert::IsTrue(cla::get("std")->empty(), L"std shouldn't have data");
+            Assert::IsTrue(cla::get("W3")->empty(), L"W3 shouldn't have data");
+        }
 	};
 }
