@@ -6,6 +6,8 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTests
 {
+    using namespace std::string_view_literals;
+
     constexpr int argc = 6;
     char const* argv[argc];
 
@@ -45,7 +47,6 @@ namespace UnitTests
         {
             Assert::IsFalse(cla::has_data("cla-test.exe"), L"cla-test.exe shouldn't have data");
             Assert::IsFalse(cla::has_data("?"), L"? shouldn't have data");
-            Assert::IsFalse(cla::has_data("std"), L"std shouldn't have data");
             Assert::IsFalse(cla::has_data("W3"), L"W3 shouldn't have data");
         }
 
@@ -57,15 +58,22 @@ namespace UnitTests
 
         TEST_METHOD(QueryingLibFlagsYieldsExpectedResults)
         {
-            constexpr std::string_view lib_0 = "C:\\Windows\\System32\\kernel.dll";
-            constexpr std::string_view lib_1 = "C:\\Users\\uname\\dev\\include\\mylib.lib";
-            constexpr std::string_view lib_2 = "C:\\include\\global\\somedll.dll";
+            auto lib_0 = "C:\\Windows\\System32\\kernel.dll"sv;
+            auto lib_1 = "C:\\Users\\uname\\dev\\include\\mylib.lib"sv;
+            auto lib_2 = "C:\\include\\global\\somedll.dll"sv;
 
             auto const& vec = *cla::get("Lib");
             Assert::IsTrue(vec.size() == 3, L"Lib should have 3 libraries");
             Assert::IsTrue(vec[0] == lib_0, L"stored lib should be equal to lib_0");
             Assert::IsTrue(vec[1] == lib_1, L"stored lib should be equal to lib_1");
             Assert::IsTrue(vec[2] == lib_2, L"stored lib should be equal to lib_2");
+        }
+
+        TEST_METHOD(StdShouldHaveCPP17)
+        {
+            auto std = "c++17"sv;
+            auto const& vec = *cla::get("std");
+            Assert::IsTrue(vec[0] == std, L"std should be c++17");
         }
 	};
 }
