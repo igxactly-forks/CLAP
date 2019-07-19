@@ -48,5 +48,11 @@ namespace UnitTests
             Assert::IsTrue(cla::get("std")->empty(), L"std shouldn't have data");
             Assert::IsTrue(cla::get("W3")->empty(), L"W3 shouldn't have data");
         }
+
+        TEST_METHOD(FlagsWithDataReturnsNonEmptyList)
+        {
+            Assert::IsFalse(cla::get("Lib")->empty(), L"? should have data");
+            Assert::IsFalse(cla::get("Wd")->empty(), L"? should have data");
+        }
 	};
 }
