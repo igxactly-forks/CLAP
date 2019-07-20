@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\clap.cpp" />
+    <ClCompile Include="UnitTestsUnix.cpp" />
     <ClCompile Include="UnitTestsWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
