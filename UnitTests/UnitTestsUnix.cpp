@@ -45,5 +45,12 @@ public:
         Assert::IsTrue(cla::has_flag("Wall"), L"Wall not found");
         Assert::IsTrue(cla::has_flag("Wdisable"), L"Wdisable not found");
     }
+
+    TEST_METHOD(DataFlagsHaveData)
+    {
+        Assert::IsTrue(cla::has_data("std"), L"std doesn't have data");
+        Assert::IsTrue(cla::has_data("lib_include"), L"lib_include doesn't have data");
+        Assert::IsTrue(cla::has_data("Wdisable"), L"Wdisable doesn't have data");
+    }
 };
 }
