@@ -59,5 +59,14 @@ public:
         Assert::IsFalse(cla::has_data("h"), L"h shouldn't have data");
         Assert::IsFalse(cla::has_data("Wall"), L"Wall shouldn't have data");
     }
+
+    TEST_METHOD(StdDataCheck)
+    {
+        auto std = "c++17"sv;
+
+        auto const& vec = *cla::get("std");
+        Assert::IsTrue(vec.size() == 1, L"std should have only 1 element");
+        Assert::IsTrue(vec[0] == std, L"std should be c++17");
+    }
 };
 }
