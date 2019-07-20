@@ -9,9 +9,9 @@
 #define CLA_LIB_EXPORT
 #endif
 
-namespace cla
+namespace clap
 {
-enum class opt_t
+enum class style
 {
     WINDOWS,
     UNIX,
@@ -55,7 +55,7 @@ enum class opt_t
  *            'x'                            <empty>
  *            't'                            <empty>
  **/
-CLA_LIB_EXPORT void parse(int argc, char const** argv, opt_t opt) noexcept;
+CLA_LIB_EXPORT void parse(int argc, char const** argv, style opt) noexcept;
 
 /**
  * Checks if a flag is present.
@@ -69,8 +69,7 @@ CLA_LIB_EXPORT bool has_data(std::string_view flag) noexcept;
 
 /**
  * Returns the data associated with the flag.
- * If no data is present, the vector is empty.
- * If no flag is found, nullptr is returned.
+ * If no data is present or the flag doesn't exist, nullptr is returned
  **/
 CLA_LIB_EXPORT std::vector<std::string_view> const* get(std::string_view flag) noexcept;
 }

@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <algorithm>
 
-namespace cla::internal
+namespace clap::internal
 {
 std::unordered_map<std::string_view, std::vector<std::string_view>> args;
 
@@ -12,14 +12,14 @@ void parse_unix(int argc, char const** argv) noexcept;
 void extract_data(std::string_view flag_view, std::string_view data_view) noexcept;
 }
 
-void cla::parse(int argc, char const** argv, cla::opt_t opt) noexcept
+void clap::parse(int argc, char const** argv, clap::style opt) noexcept
 {
     switch (opt)
     {
-    case cla::opt_t::WINDOWS:
+    case clap::style::WINDOWS:
         internal::parse_windows(argc, argv);
         break;
-    case cla::opt_t::UNIX:
+    case clap::style::UNIX:
         internal::parse_unix(argc, argv);
         break;
     default:
@@ -27,20 +27,20 @@ void cla::parse(int argc, char const** argv, cla::opt_t opt) noexcept
     }
 }
 
-bool cla::has_flag(std::string_view flag) noexcept
+bool clap::has_flag(std::string_view flag) noexcept
 {
     return internal::args.find(flag) != internal::args.end();
 }
 
-bool cla::has_data(std::string_view flag) noexcept
+bool clap::has_data(std::string_view flag) noexcept
 {
     auto* data = get(flag);
     return data && !data->empty();
 }
 
-std::vector<std::string_view> const* cla::get(std::string_view flag) noexcept
+std::vector<std::string_view> const* clap::get(std::string_view flag) noexcept
 {
-    if (auto search = internal::args.find(flag); search != internal::args.end())
+    if (auto search = internal::args.find(flag); search != internal::args.end() && !search->second.empty())
         return &search->second;
 
     return nullptr;
@@ -55,7 +55,7 @@ std::vector<std::string_view> const* cla::get(std::string_view flag) noexcept
  * 3. If it has data, extract it
  * 4. Otherwise store the flag
  */
-void cla::internal::parse_windows(int argc, char const** argv) noexcept
+void clap::internal::parse_windows(int argc, char const** argv) noexcept
 {
     for (int i = 0; i < argc; ++i)
     {
@@ -88,7 +88,7 @@ void cla::internal::parse_windows(int argc, char const** argv) noexcept
  * 3. If it starts with '-', extract single flags and store them
  * 4. Without prefixes, store the flag
  */
-void cla::internal::parse_unix(int argc, char const** argv) noexcept
+void clap::internal::parse_unix(int argc, char const** argv) noexcept
 {
     auto starts_with = [](std::string_view v, std::string_view prefix)
     {
@@ -137,7 +137,7 @@ void cla::internal::parse_unix(int argc, char const** argv) noexcept
  * 2. Extract the last data piece
  * 3. Store all the data with the flag
  */
-void cla::internal::extract_data(std::string_view flag_view, std::string_view data_view) noexcept
+void clap::internal::extract_data(std::string_view flag_view, std::string_view data_view) noexcept
 {
     std::vector<std::string_view> data;
 

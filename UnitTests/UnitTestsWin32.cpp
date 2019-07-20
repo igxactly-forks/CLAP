@@ -30,36 +30,36 @@ public:
 
     TEST_METHOD_INITIALIZE(ResetFlagDataMap)
     {
-        cla::parse(argc_win32, argv_win32, cla::opt_t::WINDOWS);
+        clap::parse(argc_win32, argv_win32, clap::style::WINDOWS);
     }
 
     TEST_METHOD(QueryingForExistingFlagsYieldsTrue)
     {
-        Assert::IsTrue(cla::has_flag("cla-test.exe"), L"cla-test.exe not found");
-        Assert::IsTrue(cla::has_flag("?"), L"? not found");
-        Assert::IsTrue(cla::has_flag("std"), L"std not found");
-        Assert::IsTrue(cla::has_flag("Lib"), L"Lib not found");
-        Assert::IsTrue(cla::has_flag("W3"), L"W3 not found");
-        Assert::IsTrue(cla::has_flag("Wd"), L"Wd not found");
+        Assert::IsTrue(clap::has_flag("cla-test.exe"), L"cla-test.exe not found");
+        Assert::IsTrue(clap::has_flag("?"), L"? not found");
+        Assert::IsTrue(clap::has_flag("std"), L"std not found");
+        Assert::IsTrue(clap::has_flag("Lib"), L"Lib not found");
+        Assert::IsTrue(clap::has_flag("W3"), L"W3 not found");
+        Assert::IsTrue(clap::has_flag("Wd"), L"Wd not found");
     }
 
     TEST_METHOD(FlagsWithNoDataReturnsEmptyList)
     {
-        Assert::IsFalse(cla::has_data("cla-test.exe"), L"cla-test.exe shouldn't have data");
-        Assert::IsFalse(cla::has_data("?"), L"? shouldn't have data");
-        Assert::IsFalse(cla::has_data("W3"), L"W3 shouldn't have data");
+        Assert::IsFalse(clap::has_data("cla-test.exe"), L"cla-test.exe shouldn't have data");
+        Assert::IsFalse(clap::has_data("?"), L"? shouldn't have data");
+        Assert::IsFalse(clap::has_data("W3"), L"W3 shouldn't have data");
     }
 
     TEST_METHOD(FlagsWithDataReturnsNonEmptyList)
     {
-        Assert::IsTrue(cla::has_data("Lib"), L"? should have data");
-        Assert::IsTrue(cla::has_data("Wd"), L"? should have data");
+        Assert::IsTrue(clap::has_data("Lib"), L"? should have data");
+        Assert::IsTrue(clap::has_data("Wd"), L"? should have data");
     }
 
     TEST_METHOD(StdShouldHaveCPP17)
     {
         auto std = "c++17"sv;
-        auto const& vec = *cla::get("std");
+        auto const& vec = *clap::get("std");
         Assert::IsTrue(vec.size() == 1, L"std should have 1 element");
         Assert::IsTrue(vec[0] == std, L"std should be c++17");
     }
@@ -70,7 +70,7 @@ public:
         auto lib_1 = "C:\\Users\\uname\\dev\\include\\mylib.lib"sv;
         auto lib_2 = "C:\\include\\global\\somedll.dll"sv;
 
-        auto const& vec = *cla::get("Lib");
+        auto const& vec = *clap::get("Lib");
         Assert::IsTrue(vec.size() == 3, L"Lib should have 3 libraries");
         Assert::IsTrue(vec[0] == lib_0, L"stored lib should be equal to lib_0");
         Assert::IsTrue(vec[1] == lib_1, L"stored lib should be equal to lib_1");
@@ -90,7 +90,7 @@ public:
         auto wd_rst = "rst"sv;
         auto wd_uvz = "uvz"sv;
 
-        auto const& vec = *cla::get("Wd");
+        auto const& vec = *clap::get("Wd");
         Assert::IsTrue(vec.size() == 10, L"Wd should have 10 elements");
         Assert::IsTrue(vec[0] == wd_123, L"vec[0] should be 123");
         Assert::IsTrue(vec[1] == wd_456, L"vec[1] should be 456");
@@ -106,10 +106,10 @@ public:
 
     TEST_METHOD(HasFlagReturnsFalseForNotStoredFlag)
     {
-        Assert::IsFalse(cla::has_flag("Hello!"), L"Hello! flag shouldn't exist");
-        Assert::IsFalse(cla::has_flag(""), L"Empty flag shouldn't exist");
-        Assert::IsFalse(cla::has_flag("\0"), L"Null char flag shouldn't exist");
-        Assert::IsFalse(cla::has_flag("Std"), L"Std flag shouldn't exist");
+        Assert::IsFalse(clap::has_flag("Hello!"), L"Hello! flag shouldn't exist");
+        Assert::IsFalse(clap::has_flag(""), L"Empty flag shouldn't exist");
+        Assert::IsFalse(clap::has_flag("\0"), L"Null char flag shouldn't exist");
+        Assert::IsFalse(clap::has_flag("Std"), L"Std flag shouldn't exist");
     }
 };
 }
