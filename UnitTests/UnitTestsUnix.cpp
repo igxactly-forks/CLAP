@@ -81,5 +81,18 @@ public:
         Assert::IsTrue(vec[1] == lib_1, L"lib_include lib_1 mismatch");
         Assert::IsTrue(vec[2] == lib_2, L"lib_include lib_2 mismatch");
     }
+
+    TEST_METHOD(WdisableDataCheck)
+    {
+        auto wd_0 = "unused-var"sv;
+        auto wd_1 = "switch-fallthrough"sv;
+        auto wd_2 = "sign-cmp-mismatch"sv;
+
+        auto const& vec = *cla::get("Wdisable");
+        Assert::IsTrue(vec.size() == 3, L"Wdisable should have 3 elements");
+        Assert::IsTrue(vec[0] == wd_0, L"Wdisable wd_0 mismatch");
+        Assert::IsTrue(vec[1] == wd_1, L"Wdisable wd_1 mismatch");
+        Assert::IsTrue(vec[2] == wd_2, L"Wdisable wd_2 mismatch");
+    }
 };
 }
