@@ -52,5 +52,12 @@ public:
         Assert::IsTrue(cla::has_data("lib_include"), L"lib_include doesn't have data");
         Assert::IsTrue(cla::has_data("Wdisable"), L"Wdisable doesn't have data");
     }
+
+    TEST_METHOD(HasDataReturnsFalseWithFlagsWithoutData)
+    {
+        Assert::IsFalse(cla::has_data("cla-test"), L"cla-test shouldn't have data");
+        Assert::IsFalse(cla::has_data("h"), L"h shouldn't have data");
+        Assert::IsFalse(cla::has_data("Wall"), L"Wall shouldn't have data");
+    }
 };
 }
