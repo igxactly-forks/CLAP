@@ -68,5 +68,18 @@ public:
         Assert::IsTrue(vec.size() == 1, L"std should have only 1 element");
         Assert::IsTrue(vec[0] == std, L"std should be c++17");
     }
+
+    TEST_METHOD(LibIncludeDataCheck)
+    {
+        auto lib_0 = "/usr/lib/include/usrlib.a"sv;
+        auto lib_1 = "/etc/lib/libmain.so"sv;
+        auto lib_2 = "~/include/lib/mylib.so"sv;
+
+        auto const& vec = *cla::get("lib_include");
+        Assert::IsTrue(vec.size() == 3, L"lib_include should have 3 elements");
+        Assert::IsTrue(vec[0] == lib_0, L"lib_include lib_0 mismatch");
+        Assert::IsTrue(vec[1] == lib_1, L"lib_include lib_1 mismatch");
+        Assert::IsTrue(vec[2] == lib_2, L"lib_include lib_2 mismatch");
+    }
 };
 }
