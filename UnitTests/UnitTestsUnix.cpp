@@ -8,7 +8,7 @@ namespace UnitTests
 {
 using namespace std::string_view_literals;
 
-constexpr int argc_unix = 6;
+constexpr int argc_unix = 7;
 char const* argv_unix[argc_unix];
 
 TEST_CLASS(UnitTestsUnix)
@@ -29,6 +29,7 @@ public:
             "unused-var,"
             "switch-fallthrough,"
             "sign-cmp-mismatch";
+        argv_unix[6] = "-xvfcq";
     }
 
     TEST_METHOD_INITIALIZE(ResetFlagDataMap)
@@ -93,6 +94,31 @@ public:
         Assert::IsTrue(vec[0] == wd_0, L"Wdisable wd_0 mismatch");
         Assert::IsTrue(vec[1] == wd_1, L"Wdisable wd_1 mismatch");
         Assert::IsTrue(vec[2] == wd_2, L"Wdisable wd_2 mismatch");
+    }
+
+    TEST_METHOD(SingleHyphenMultiFlag)
+    {
+        // -xvfcq
+        Assert::IsTrue(cla::has_flag("x"), L"x not found");
+        Assert::IsTrue(cla::has_flag("v"), L"v not found");
+        Assert::IsTrue(cla::has_flag("f"), L"f not found");
+        Assert::IsTrue(cla::has_flag("c"), L"c not found");
+        Assert::IsTrue(cla::has_flag("q"), L"q not found");
+
+        Assert::IsFalse(cla::has_data("x"), L"x shouldn't have data");
+        Assert::IsFalse(cla::has_data("v"), L"v shouldn't have data");
+        Assert::IsFalse(cla::has_data("f"), L"f shouldn't have data");
+        Assert::IsFalse(cla::has_data("c"), L"c shouldn't have data");
+        Assert::IsFalse(cla::has_data("q"), L"q shouldn't have data");
+    }
+
+    TEST_METHOD(UnexistingFlagsShouldBeFound)
+    {
+        Assert::IsFalse(cla::has_flag("-"), L"- is not allowed as flag");
+        Assert::IsFalse(cla::has_flag("--"), L"-- is not allowed as flag");
+        Assert::IsFalse(cla::has_flag(""), L"<empty> is not allowed as flag");
+        Assert::IsFalse(cla::has_flag("xvfcq"), L"xvfcq shouldn't exist");
+        Assert::IsFalse(cla::has_flag("\0"), L"\0 shouldn't exist");
     }
 };
 }
